@@ -1,0 +1,63 @@
+body{
+    background : linear-gradient(to left,#00ffe5,#090086);
+}
+header #BTN{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    margin-right: 15px;
+}
+#BTN #A,#D{
+    color: white;
+}
+#Noms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+#Noms > div {
+    flex: 0 0 calc(33.333% - 40px);
+    border: 0.5px solid black;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+}
+
+#Noms img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+}
+h6{
+    font-size: 1.2rem;
+    text-align: center;
+}
+h1{
+    color: white;
+    font-family: 'Verdana';
+    text-align: center;
+}
+select{
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+}
+#A,#D:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+#logo img{
+    height: 150px;
+    width: 170px;
+}
+p{
+    font-family: Arial;
+}
