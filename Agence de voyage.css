@@ -1,63 +1,85 @@
-body{
-    background : linear-gradient(to left,#00ffe5,#090086);
-}
-header #BTN{
-    display: flex;
-    justify-content: space-between;
-    background-color: black;
-    align-items: center;
-    position: absolute;
-    top: 20px;
-    right: 15px;
-    margin-right: 15px;
-}
-#BTN #A,#D{
-    color: white;
-}
-#Noms {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-#Noms > div {
-    flex: 0 0 calc(33.333% - 40px);
-    border: 0.5px solid black;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    border-radius: 20px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to left, #00ffe5, #090086);
 }
 
-#Noms img {
-    width: 100%;
-    height: 200px;
-    border-radius: 8px;
+header {
+  background-color: #000;
+  padding: 10px 20px;
+  color: white;
 }
-h6{
-    font-size: 1.2rem;
-    text-align: center;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-h1{
+
+#logo {
+  height: 80px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav li {
+  cursor: pointer;
+}
+
+nav li:hover {
+  text-decoration: underline;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filters select,
+.filters input {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+}
+
+.voyage-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px;
+}
+
+.voyage-card {
+  background-color: white;
+  border-radius: 10px;
+  width: 300px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.voyage-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.voyage-card h2 {
+  margin-top: 10px;
+}
+
+.voyage-card p {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+li a{
     color: white;
-    font-family: 'Verdana';
-    text-align: center;
-}
-select{
-    border: none;
-    border-radius: 50px;
-    padding: 10px;
-}
-#A,#D:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
-#logo img{
-    height: 150px;
-    width: 170px;
-}
-p{
-    font-family: Arial;
 }

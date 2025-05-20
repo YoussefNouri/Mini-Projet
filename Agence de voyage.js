@@ -1,98 +1,108 @@
+let dataGlobal = [];
+
 fetch("https://dreamstravel.onrender.com/voyages")
-.then(response => response.json())
-.then(data => data.forEach(elt => {
-        let oldpage = document.body.cloneNode(true);
-        let accueil = document.getElementById("A");
-        accueil.addEventListener("click",() => {
-                document.body.replaceWith(oldpage);
-        });
-        let divNoms = document.getElementById("Noms");
-        let divs = document.createElement("div");
-        divs.setAttribute("id",`${elt.id}`)
-        let h2 = document.createElement("h2");
-        h2.innerHTML = elt.nom;
-        let span = document.createElement("span");
-        span.innerHTML = ` (${elt.destination})`;
-        h2.append(span);
-        let img = document.createElement("img");
-        img.setAttribute("src",`${elt.photo}`);
-        divs.append(h2,img);
-        divNoms.append(divs);
+  .then(response => response.json())
+  .then(data => {
+    dataGlobal = data;
+    afficherVoyages(data);
+    remplirFiltres(data);
+    ajouterListeners(data);
+  });
+function afficherVoyages(data) {
+  const container = document.getElementById("Noms");
+  container.innerHTML = "";
+  data.forEach(elt => {
+    const card = document.createElement("div");
+    card.setAttribute("class","voyage-card");
+    const h2 = document.createElement("h2");
+    h2.textContent = `${elt.nom} (${elt.destination})`;
 
-        let details = document.getElementById("D");
-        details.addEventListener("click",() => {
-                let p = document.createElement("p");
-                p.innerHTML = `${elt.description}`
-                let ul = document.createElement("ul");
-                let li1 = document.createElement("li");
-                li1.innerHTML = `Départ : ${elt.depart}`;
-                let li2 = document.createElement("li");
-                li2.innerHTML = `Remise : ${elt.remise}`;
-                let li3 = document.createElement("li");
-                li3.innerHTML = `Complet : ${elt.complet}`;
-                let li4 = document.createElement("li");
-                li4.innerHTML = `Offre : ${elt.offre}`;
-                let li5 = document.createElement("li");
-                li5.innerHTML = `Hors Offre : ${elt.horsOffre}`;
-                ul.append(li1,li2,li3,li4,li5);
-                p.append(ul);
-                divs.append(p);
-        });
-        let select1 = document.getElementById("Countries");
-        let option1 = document.createElement("option");
-        option1.setAttribute("value",`${elt.destination}`);
-        option1.setAttribute("id",`${elt.categId}`);
-        option1.innerHTML = `✈️${elt.destination},Catégorie : ${elt.categId}`;
-        if(![...select1.options].some(option => option.value === option1.value)){
-                select1.append(option1);
-        }
-        select1.addEventListener("change",opt => {
-                let selectedValue = opt.target.value;
-                let selectedId = opt.target.id;
-                let selectedOption = data.find(elt => elt.destination === selectedValue && elt.categId === selectedId);
-                if(selectedOption){
-                        h2.innerHTML = selectedOption.nom;
-                        span.innerHTML = `(${selectedOption.destination})`;
-                        img.src = `${selectedOption.photo}`;
-                        divs.append(h2,span,img);
-                }
-        });
+    const img = document.createElement("img");
+    img.src = elt.photo;
 
-        let select2 = document.getElementById("Prix");
-        let option2 = document.createElement("option");
-        option2.setAttribute("value",`${elt.prix}`);
-        option2.innerHTML = `💰${elt.prix}`;
-        if(![...select2.options].some(option => option.value === option2.value)){
-                select2.append(option2);
-        }
-        select2.addEventListener("change",option => {
-                let selectedValue = option.target.value;
-                let selectedOption = data.find(elt => elt.prix === selectedValue);
-                if(selectedOption){
-                        h2.textContent = selectedOption.nom;    
-                        span.textContent = ` (${selectedOption.destination})`;
-                        img.src = `${selectedOption.photo}`;
-                        let prix = document.createElement("p");
-                        prix.textContent = `Prix : ${selectedOption.prix}`;
-                        divs.append(h2,span,imgprix);
-                }
-        })
-        let select3 = document.getElementById("Durée");
-        let option3 = document.createElement("option");
-        option3.innerHTML = `⌚${elt.duree}`;
-        if(![...select3.options].some(option => option.value === option3.value)){
-                select3.append(option3);
-        }
-        select3.addEventListener("change",option =>{
-                let selectedValue = option.target.value;
-                let selectedOption = data.find(elt => elt.duree === selectedValue);
-                if(selectedOption){
-                        h2.textContent = selectedOption.nom;
-                        span.textContent = `(${selectedOption.destination})`;
-                        img.src = `${selectedOption.photo}`;
-                        let duree = document.createElement("p");
-                        duree.innerHTML = `Durée : ${selectedOption.duree}`;
-                        divs.append(h2,span,img,duree);
-                }
-        })
-}))
+    const prix = document.createElement("p");
+    prix.textContent = `Prix : ${elt.prix} TND`;
+
+    const duree = document.createElement("p");
+    duree.textContent = `Durée : ${elt.duree} jours`;
+
+    const cat = document.createElement("p");
+    cat.textContent = `Catégorie : ${elt.categId}`;
+
+    card.append(h2, img, prix, duree, cat);
+    document.getElementById("Noms").append(card);
+  });
+}
+
+function remplirFiltres(data) {
+  const selectCountries = document.getElementById("Countries");
+  const selectDuree = document.getElementById("Duree");
+  data.forEach(elt =>{
+     let option1 = document.createElement("option");
+     option1.setAttribute("value",`${elt.description}`);
+    let option2 = document.createElement("option");
+    option2.setAttribute("value",`${elt.duree}`);
+    option1.innerHTML = `${elt.destination}`;
+    option2.innerHTML = `${elt.duree} jours`;
+    if(![...selectCountries.options].some(option => option.value === option1.value)){
+      selectCountries.append(option1);
+    }
+    if(![...selectDuree.options].some(option => option.value === option2.value)){
+      selectDuree.append(option2);
+    }
+  })
+}
+function ajouterListeners(data) {
+  document.getElementById("Countries").addEventListener("change", () => filtrer(data));
+  document.getElementById("PrixMin").addEventListener("input", () => filtrer(data));
+  document.getElementById("PrixMax").addEventListener("input", () => filtrer(data));
+  document.getElementById("Duree").addEventListener("change", () => filtrer(data));
+  document.getElementById("A").addEventListener("click", () => {
+    document.getElementById("Countries").value = "";
+    document.getElementById("PrixMin").value = "";
+    document.getElementById("PrixMax").value = "";
+    document.getElementById("Duree").value = "";
+    afficherVoyages(dataGlobal);
+  });
+  document.getElementById("D").addEventListener("click", () => {
+    const container = document.getElementById("Noms");
+    container.innerHTML = "";
+    dataGlobal.forEach(elt => {
+      const card = document.createElement("div");
+      card.setAttribute("class","voyage-card");
+      const h2 = document.createElement("h2");
+      h2.textContent = `${elt.nom} (${elt.destination})`;
+      const img = document.createElement("img");
+      img.src = elt.photo;
+      const desc = document.createElement("p");
+      desc.innerHTML = `<strong>Description :</strong> ${elt.description}`;
+      const depart = document.createElement("p");
+      depart.innerHTML = `<strong>Départ :</strong> ${elt.depart}`;
+      const remise = document.createElement("p");
+      remise.innerHTML = `<strong>Remise :</strong> ${elt.remise}`;
+      const complet = document.createElement("p");
+      complet.innerHTML = `<strong>Complet :</strong> ${elt.complet}`;
+      const offre = document.createElement("p");
+      offre.innerHTML = `<strong>Offre :</strong> ${elt.offre}`;
+      const horsOffre = document.createElement("p");
+      horsOffre.innerHTML = `<strong>Hors Offre :</strong> ${elt.horsOffre}`;
+      card.append(h2, img, desc, depart, remise, complet, offre, horsOffre);
+      container.appendChild(card);
+    });
+  });
+}
+function filtrer(data) {
+  const pays = document.getElementById("Countries").value.trim();
+  const duree = document.getElementById("Duree").value.trim();
+  const prixMinInput = document.getElementById("PrixMin").value.trim();
+  const prixMaxInput = document.getElementById("PrixMax").value.trim();
+  // Convertir les valeurs en Number si elles existent
+  const prixMin = prixMinInput !== "" ? parseFloat(prixMinInput) : null;
+  const prixMax = prixMaxInput !== "" ? parseFloat(prixMaxInput) : null;
+    const resultats = data.filter(elt => {
+    const matchDestination = !pays || elt.destination === pays;
+    const matchDuree = !duree || elt.duree == Number(duree);
+    const matchPrixMin = prixMin === null || elt.prix >= prixMin;
+    const matchPrixMax = prixMax === null || elt.prix <= prixMax;
+    return matchDestination && matchDuree && matchPrixMin && matchPrixMax;
+  })};

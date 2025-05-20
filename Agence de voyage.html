@@ -7,30 +7,32 @@
     <link rel="stylesheet" href="Agence de voyage.css">
 </head>
 <body>
-    <header>
-        <div id="logo">
-            <img src="Dreams.png">
-        </div>
-        <div id="BTN">
-        <span id="A">Accueil</span>
-        <span id="D">Details</span>
-        <span>
-            <select id="Countries">
-
-            </select>
-             <select id="Prix">
-
-            </select>
-            <select id="Durée">
-
-            </select>
-        </div>
-        
-    </header>
-    <section id="N">
-        <div id="Noms">
-        </div>
-    </section>
+    
+       <header>
+    <div class="container">
+      <img src="Dreams.png" alt="Logo Dreams Travel" id="logo">
+      <nav>
+        <ul>
+        <li><a href="Login.html">Se Connecter</a></li>
+          <li id="A">Accueil</li>
+          <li id="D">Détails</li>
+        </ul>
+      </nav>
+      <div class="filters">
+        <select id="Countries">
+          <option value="">Destination</option>
+        </select>
+        <input type="number" id="PrixMin" placeholder="Prix min">
+        <input type="number" id="PrixMax" placeholder="Prix max">
+        <select id="Duree">
+          <option value="">Durée</option>
+        </select>
+      </div>
+    </div>
+  </header>
+  <section id="voyages">
+    <div id="Noms" class="voyage-container"></div>
+  </section>
     <script src="Agence de voyage.js"></script>
-</body>
+</body> 
 </html>

@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="Login.css">
 </head>
 <body>
-    <h1>Login</h1>
-        <form action="">
-        <div>
-        <label for="Login">Login : </label>
-        <input type="text" id="txt"><br>
-        <label for="password">Password :</label>
-        <input type="password" id="pwd"><br>
-        <input type="submit" value="Se Connecter" id="BTN">
-        </div>    
-    </form>
+    <div class="container">
+        <div class="login-box">
+            <img src="Dreams.png" alt="Logo Dreams Travel" class="logo">
+            <h1>Connexion</h1>
+            <form action="Voyage.html">
+                <label for="login">Identifiant</label>
+                <input type="text" id="login" placeholder="Entrez votre identifiant" required>
+                <label for="pwd">Mot de passe</label>
+                <input type="password" id="pwd" placeholder="Entrez votre mot de passe" required>
+                <button type="submit" id="BTN">Se Connecter</button>
+            </form>
+        </div>
+    </div>
     
 </body>
 </html>

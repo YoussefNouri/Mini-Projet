@@ -1,54 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voyage</title>
+  <meta charset="UTF-8">
+  <title>Gestion des Voyages</title>
+  <link rel="stylesheet" href="Voyage.css">
 </head>
-<style>
-    table,tr,th,td{
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-</style>
 <body>
-    <form>
+  <h1>Gestion des voyages - Dreams Travel</h1>
+
+  <form>
         <fieldset>
-            <legend>Ajout d'un voyage</legend>
-        <label for="Catégorie">Catégorie : <label>
+        <legend>Ajout d'un voyage</legend>
+        <label>Catégorie :</label>
         <input type="text" id="Cat"><br>
-        <label for="Nom">Nom : </label>
+        <label>Nom : </label>
         <input type="text" id="N"><br>
-        <label for="Photo">Photo : </label>
+        <label>Photo : </label>
         <input type="text" id="Ph"><br>
-        <label for="Destination">Destination : </label>
+        <label>Destination : </label>
         <input type="text" id="D"><br>
-        <label for="Prix">Prix : </label>
+        <label>Prix : </label>
         <input type="number" id="prix"><br>
-        <label for="Duree">Durée :</label>
+        <label>Durée :</label>
         <input type="number" id="Dur"><br>
-        <label for="Date de départ">Date de départ</label>
+        <label>Date de départ</label>
         <input type="date" id="date"><br>
-        <button id="BTNAjouter">Ajouter</button><br>
-        <button id="BTNReset">Réinsiatialiser</button><br>
+        <button type="button" id="BTNAjouter">Ajouter</button><br>
+        <button type="button" id="BTNReset">Réinsiatialiser</button><br>
         </fieldset>
     </form>
     <table>
-        <tr>
-            <th>Catégorie</th>
-            <th>Nom</th>
-            <th>Photo</th>
-            <th>Destination</th>
-            <th>Prix</th>
-            <th>Durée</th>
-            <th>Date de départ</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
-            <th>Haut</th>
-            <th>Bas</th>
-            <th>Mise en forme</th>
-        </tr>
-    </table>
-    <script src="Voyage.js"></script>
+    <tr>
+      <th>Catégorie</th><th>Nom</th><th>Photo</th><th>Destination</th>
+      <th>Prix</th><th>Durée</th><th>Date</th>
+      <th>Modifier</th><th>Supprimer</th><th>Haut</th><th>Bas</th><th>Mise en forme</th>
+    </tr>
+</table>
+  <script src="Voyage.js"></script>
 </body>
 </html>
+    
+    
